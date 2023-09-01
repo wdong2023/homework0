@@ -1,0 +1,53 @@
+---
+title: "homework0"
+author: "Wanyue Dong"
+format: html
+editor: visual
+---
+
+## Plot
+
+In the following plot section, I first assigned numbers to a,b,c (a=1,b=3,c=2) and created x to be a sequence of numbers between -5 and 5. Then I generated a graph by plotting the function $y=ax^2+bx+c$ and added a horizontal line at $y=0$ to show the solutions to $ax^2+bx+c=0$
+
+```{r}
+#| echo: false
+a <- 1 
+b <- 3
+c <- 2
+x <- seq(-5, 5, length = 300)
+plot(x, a*x^2 + b*x + c, type = "l")
+abline(h = 0, lty = 2)
+```
+
+## Solutions
+
+This section is finding the numeric solutions to $ax^2+bx+c=0$. I created a function called `f` with a,b,c as inputs. It returns 0, 1, or 2 solutions to the function. It is discriminated by whether $b^2-4ac$ is greater, equal, or less than 0. The solution is calculated by the function $\frac{-b\pm\sqrt{b^2-4ac}}{2a}$
+
+-   if $b^2-4ac < 0$
+    -   the function has 0 solution
+-   if $b^2-4ac = 0$
+    -   the function has exactly 1 solution
+-   if $b^2-4ac > 0$
+    -   the function has 2 solutions
+
+```{r}
+#| echo: false
+
+f <- function(a,b,c){
+  if ((b^2-4*a*c) < 0){
+    return ("no solution")
+  }
+  else if ((b^2-4*a*c) == 0){
+    return (-b/(2*a))
+  }
+  else {
+    x1 <- (-b+sqrt(b^2-4*a*c))/(2*a)
+    x2 <- (-b-sqrt(b^2-4*a*c))/(2*a)
+    return (list(x1=x1,x2=x2))
+  }
+}
+
+f(1,3,2)
+
+```
+In the case of $a=1,b=3,c=2$, the function has two solutions with $x_1 =-1, x_2 = -2$
